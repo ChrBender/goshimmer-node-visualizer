@@ -30,6 +30,14 @@
   <div id="3d-graph"></div>
 
   <script>
+  
+  	document.getElementById("id-input").addEventListener("keyup", function(event) {
+	  if (event.keyCode === 13) {
+		event.preventDefault();
+		document.getElementById("id-input-button").click();
+	  }
+	});
+
     var socket = new WebSocket(((window.location.protocol === "https:") ? "wss://" : "ws://") + "159.69.158.51" + "/datastream");
 
     socket.onopen = function () {
@@ -117,8 +125,12 @@
         console.log(neighbors);
         return `id: ${node.id} links: ${links}`
       })
+      .linkDirectionalArrowLength(1)
+      .linkDirectionalArrowRelPos(0.53)
+      .linkDirectionalArrowColor(link => 'rgba(100,150,200,0.7)')
+      .linkColor(link => 'rgba(200,150,200,1)')
       .height(window.innerHeight - 41)
-      .width(window.innerWidth)
+      .width(window.innerWidth);
 
 
 
